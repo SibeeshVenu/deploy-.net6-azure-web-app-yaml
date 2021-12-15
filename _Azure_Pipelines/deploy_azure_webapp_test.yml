@@ -1,0 +1,19 @@
+trigger:
+  branches:
+    include:
+      - dev
+
+variables:
+  solution: "**/*.sln"
+  buildPlatform: "x86"
+  buildConfiguration: "Release"
+
+pool:
+  name: Default
+
+stages:
+  - template: templates/deploy_azure_webapp.yml
+    parameters:
+      azureSubscription: "admin-t-service-connection"
+      webAppName: "admin-t-weu-aps01"
+      sourceBranchTrigger: "refs/heads/dev"
